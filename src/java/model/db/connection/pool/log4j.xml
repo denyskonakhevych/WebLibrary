@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender"> 
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <!-- Pattern to output the caller's file name and line number -->
+            <param name="ConversionPattern" value="%5p [%d] (%F:%L) - %m%n"/>
+        </layout> 
+    </appender> 
+    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender"> 
+        <param name="file" value="D:\\logs\\logging.log"/>
+        <param name="MaxFileSize" value="100KB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="%p %d %c - %m%n"/> 
+        </layout> 
+    </appender>
+    <appender name="fileAppenderDb" class="org.apache.log4j.RollingFileAppender"> 
+        <param name="file" value="D:\\logs\\db\\logging.log"/>
+        <param name="MaxFileSize" value="100KB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="%p %d %c - %m%n"/> 
+        </layout> 
+    </appender>
+    <appender name="fileAppenderAut" class="org.apache.log4j.RollingFileAppender"> 
+        <param name="file" value="D:\\logs\\aut\\logging.log"/>
+        <param name="MaxFileSize" value="100KB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="5"/>
+        <layout class="org.apache.log4j.PatternLayout"> 
+        <param name="ConversionPattern" value="%p %d %c - %m%n"/> 
+        </layout> 
+    </appender>
+    <logger name="db.logger">
+        <level value ="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppenderDb"/>
+    </logger>
+    <logger name="aut.logger">
+        <level  value ="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppenderAut"/>
+    </logger>
+    <root>
+        <priority value ="DEBUG"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppender"/>
+    </root>
+</log4j:configuration>
